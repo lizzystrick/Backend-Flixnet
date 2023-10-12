@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "WVIn+yNGHZoYehTW1leIfVXI1agWNdUsiRC3wTiJdA9OH/DgQCNqYJJqzW+ohDbF+xwqx8bSA9sT+CnC2Fzkag==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Lizzy\\OneDrive\\Documenten\\Semester 3.2\\Backend-Flixnet\\FlixnetBackend\\FlixnetBackend\\FlixnetBackend.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Lizzy\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.0\\microsoft.visualstudio.azure.containers.tools.targets.1.17.0.nupkg.sha512"
+  ],
+  "logs": []
+}

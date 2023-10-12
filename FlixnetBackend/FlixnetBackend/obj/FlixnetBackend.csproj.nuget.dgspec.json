@@ -1,0 +1,72 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Lizzy\\OneDrive\\Documenten\\Semester 3.2\\Backend-Flixnet\\FlixnetBackend\\FlixnetBackend\\FlixnetBackend.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Lizzy\\OneDrive\\Documenten\\Semester 3.2\\Backend-Flixnet\\FlixnetBackend\\FlixnetBackend\\FlixnetBackend.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Lizzy\\OneDrive\\Documenten\\Semester 3.2\\Backend-Flixnet\\FlixnetBackend\\FlixnetBackend\\FlixnetBackend.csproj",
+        "projectName": "FlixnetBackend",
+        "projectPath": "C:\\Users\\Lizzy\\OneDrive\\Documenten\\Semester 3.2\\Backend-Flixnet\\FlixnetBackend\\FlixnetBackend\\FlixnetBackend.csproj",
+        "packagesPath": "C:\\Users\\Lizzy\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Lizzy\\OneDrive\\Documenten\\Semester 3.2\\Backend-Flixnet\\FlixnetBackend\\FlixnetBackend\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Lizzy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+              "target": "Package",
+              "version": "[1.17.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
