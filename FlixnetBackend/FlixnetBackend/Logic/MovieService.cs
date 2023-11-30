@@ -17,5 +17,12 @@ namespace FlixnetBackend.Logic
             this.mapper = mapper;
             this.movieRepository = movieRepository;
         }
+
+        public void SaveMovies(List<Movie> movies)
+        {
+            movieRepository.SaveMovies(movies);
+        }
+
+
     }
 }

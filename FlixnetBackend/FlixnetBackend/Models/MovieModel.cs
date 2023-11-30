@@ -7,15 +7,26 @@ namespace FlixnetBackend.Models
     {
         public Guid ID { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
-        public List<string> Images { get; set; }
+        public string Overview { get; set; }
+        public string ImageUrl { get; set; }
+        public int GenreId { get; set; }
 
-        public MovieModel(Guid id, string title, string description, List<string> images)
+        public MovieModel(Guid id, string title, string description, string images, int genreId)
         {
             ID = id;
             Title = title;
-            Description = description;
-            Images = images;
+            Overview = description;
+            ImageUrl = images;
+            GenreId = genreId;  
+        }
+
+        public MovieModel(Movie movie)
+        {
+            ID = movie.ID;
+            Title = movie.Title;
+            Overview = movie.Overview;
+            ImageUrl = movie.ImageUrl;
+            GenreId = movie.GenreId;
         }
     }
 }

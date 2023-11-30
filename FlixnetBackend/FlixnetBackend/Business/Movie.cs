@@ -7,7 +7,13 @@ namespace FlixnetBackend.Business
     {
         [Key][Required] public Guid ID { get; set; }
         [Required] public string Title { get; set; }
-        public string Description { get; set; }
-        public virtual ICollection<MovieImage> Images { get; set; }
+        public string Overview { get; set; }
+        public string ImageUrl { get; set; }
+        public int GenreId { get; set; } 
+
+        public Movie()
+        {
+
+        }
     }
 }

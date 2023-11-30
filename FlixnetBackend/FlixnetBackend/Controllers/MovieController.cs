@@ -1,13 +1,18 @@
 ﻿using AutoMapper;
+using FlixnetBackend.Business;
 using FlixnetBackend.Interfaces;
 using FlixnetBackend.Models;
+using FlixnetBackend.Repositories;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FlixnetBackend.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class MovieController : Controller
+    public class MovieController : ControllerBase
     {
         private readonly IMovieService movieService;
         private readonly IMapper mapper;
@@ -16,10 +21,20 @@ namespace FlixnetBackend.Controllers
         {
             this.movieService = movieLogic;
             this.mapper = mapper;
+         
         }
-        public IActionResult Index()
+
+        [HttpPost]
+        public IActionResult SaveMovies(List<MovieModel> model)
         {
-            return View();
+            if (model == null || model.Count == 0)
+            {
+                return BadRequest("Invalid movie data");
+            }
+
+            var movies = mapper.Map<List<Movie>>(model);
+            movieService.SaveMovies(movies);    
+            return Ok("Movies saved succesfully");
         }
     }
 }
