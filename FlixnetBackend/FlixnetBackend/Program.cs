@@ -7,6 +7,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using System.Text;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.JsonWebTokens;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace FlixnetBackend
 {
@@ -20,10 +27,31 @@ namespace FlixnetBackend
             //ConfigureApp(builder);
 
             // Add services to the container.
-            
+
+            builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 7;
+            })
+                .AddEntityFrameworkStores<DBContext>()
+                .AddDefaultTokenProviders();
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+               .AddJwtBearer(options =>
+               {
+                   options.TokenValidationParameters = new TokenValidationParameters
+                   {
+                       ValidateIssuer = true,
+                       ValidateAudience = true,
+                       ValidateLifetime = true,
+                       ValidateIssuerSigningKey = true,
+                       ValidIssuer = "http://localhost:7294",
+                       ValidAudience = "http://localhost:4200",
+                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("This is our secret key, its not very safe"))
+                   };
+               });
             builder.Services.AddCors(options =>
             {
                 options.AddDefaultPolicy(builder =>
@@ -57,6 +85,7 @@ namespace FlixnetBackend
             app.UseHttpsRedirection();
             
             app.UseCors();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
@@ -119,6 +148,7 @@ namespace FlixnetBackend
             builder.Services.AddScoped<IMovieRepository, MovieRepository>();
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
         }
 
     }

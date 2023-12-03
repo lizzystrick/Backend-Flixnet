@@ -14,7 +14,7 @@ namespace FlixnetBackend.Models
         {
             ID = id;
             UserName = username;
-            Email = email;  
+            Email = email;
             Password = password;
         }
 
@@ -25,6 +25,13 @@ namespace FlixnetBackend.Models
             Email = user.Email;
             Password = user.Password;
 
+        }
+
+        public UserModel(Guid id, string email, string password)
+        {
+            ID = id;
+            Email = email;
+            Password = password;
         }
     }
 }

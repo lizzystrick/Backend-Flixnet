@@ -1,18 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
 
-namespace FlixnetBackend.Business
+namespace FlixnetBackend.Models
 {
-    public class User : IdentityUser<Guid>
+    public class LoginModel
     {
         [Key][Required] public Guid ID { get; set; }
-        public string UserName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
 
-        public User()
+        public LoginModel(Guid id, string email, string password)
         {
-
+            ID = id;
+            Email = email;
+            Password = password;
         }
     }
 }

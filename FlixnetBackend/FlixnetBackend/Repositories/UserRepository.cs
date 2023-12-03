@@ -22,12 +22,24 @@ namespace FlixnetBackend.Repositories
             return user;
         }
 
-        public User GetUserByID(Guid userID)
+        public User GetUserByEmail(string email)
         {
-            User user = Users.Where(x => x.ID == userID).FirstOrDefault();
-            if (user == null)
+            User user = null;
+            try
             {
-                throw new Exception("User not found");
+                user = Users.FirstOrDefault(x => x.Email == email);
+                if (user == null)
+                {
+                    Console.WriteLine("Gebruiker niet gevonden");
+                }
+                else
+                {
+                    Console.WriteLine($"Gebruiker gevonden: {user.ID}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Er is een fout opgetreden: {ex.Message}");
             }
             return user;
         }
@@ -37,6 +49,17 @@ namespace FlixnetBackend.Repositories
             Save();
             return userEntity;
         }
+
+       /* public async Task<Guid?> GetUserId(string email)
+        {
+            var user = await Users.SingleOrDefaultAsync(u => u.Email == email);
+
+            if (user != null)
+            {
+                return user.ID;
+            }
+            return Guid.Empty;
+        }*/
 
         public void Save()
         {
