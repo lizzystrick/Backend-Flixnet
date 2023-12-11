@@ -32,8 +32,8 @@ jobs:
       with:
           logout: false
           registry: ghcr.io
-          username: ${{ secrets.ghcr_username }}
-          password: ${{ secrets.ghcr_password }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
           
  # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
