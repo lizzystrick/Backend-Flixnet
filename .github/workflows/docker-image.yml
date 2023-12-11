@@ -48,7 +48,7 @@ jobs:
           file: .\Backend-Flixnet\FlixnetBackend\FlixnetBackend\Dockerfile
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.LOWERCASE_REPO_NAME }}
+          tags: ghcr.io/${{ env.LOWERCASE_REPO_NAME }}:latest
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
