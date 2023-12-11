@@ -44,7 +44,9 @@ jobs:
           file: ./FlixnetBackend/Dockerfile
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ghcr.io/${{ github.repository | lower }}:${{ github.run_number }}-${{ github.sha }}
+          tags: ${{ env.DOCKER_IMAGE_TAG }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+    env:
+      DOCKER_IMAGE_TAG: ghcr.io/${{ github.repository | lower }}:${{ github.run_number }}-${{ github.sha }}
