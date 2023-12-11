@@ -22,11 +22,13 @@ namespace FlixnetBackend
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            //var configuration = builder.Configuration;
-            //ConfigureServices(builder.Services, configuration);
-            //ConfigureApp(builder);
+            var app = builder.Build();
 
-            // Add services to the container.
+            app.MapGet("/", () => "Hello, FlixnetBackend!");
+
+            app.Run();
+
+            /*var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
             {
@@ -91,7 +93,7 @@ namespace FlixnetBackend
 
             app.MapControllers();
 
-            app.Run();
+            app.Run();*/
         }
 
         /*private static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
