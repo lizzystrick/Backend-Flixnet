@@ -35,14 +35,16 @@ jobs:
     - name: Set environment variables
       run: |
         echo "LOWERCASE_REPO_NAME=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
-          
+
+    - name: Change working directory
+      run: cd ./Backend-Flixnet/FlixnetBackend/FlixnetBackend
  # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
     - name: Build and push Docker image
       id: build-and-push
       uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
       with:
-          file: ./Backend-Flixnet/FlixnetBackend/FlixnetBackend
+          file: ./FlixnetBackend/FlixnetBackend
           context: .
           push: ${{ github.event_name != 'pull_request' }}
           tags: ghcr.io/${{ env.LOWERCASE_REPO_NAME }}:latest
