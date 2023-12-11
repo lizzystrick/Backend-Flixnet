@@ -7,7 +7,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["FlixnetBackend", "FlixnetBackend/"]
+COPY ["FlixnetBackend/FlixnetBackend.csproj", "FlixnetBackend/"]
 RUN dotnet restore "FlixnetBackend/FlixnetBackend.csproj"
 COPY . .
 WORKDIR "/src/FlixnetBackend"
