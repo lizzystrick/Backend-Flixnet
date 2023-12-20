@@ -25,7 +25,7 @@ jobs:
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
     - name: Log in to GitHub Container Registry
-      run: echo ${{ secrets.ghcr_password }} | docker login ghcr.io -u ${{ ghcr_username }} --password-stdin
+      run: echo ${{ secrets.ghcr_password }} | docker login ghcr.io -u ${{ secrets.ghcr_username }} --password-stdin
 
     - name: Set environment variables
       run: |
