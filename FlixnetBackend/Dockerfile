@@ -10,7 +10,7 @@ WORKDIR /src
 COPY ["FlixnetBackend.csproj", "FlixnetBackend/"]
 RUN dotnet restore "FlixnetBackend/FlixnetBackend.csproj"
 COPY . .
-WORKDIR "/src/FlixnetBackend"
+WORKDIR "/src"
 RUN dotnet build "FlixnetBackend.csproj" -c Release -o /app/build
 
 FROM build AS publish
