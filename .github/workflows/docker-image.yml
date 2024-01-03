@@ -74,16 +74,18 @@ jobs:
 
     - name: Install SonarScanner
       run: |
-        wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
-        unzip sonar-scanner-cli-4.6.2.2472-linux.zip
-        export PATH="$PWD/sonar-scanner-4.6.2.2472-linux/bin:$PATH"
-      working-directory: /usr/local/bin
+        sudo apt-get update -qy
+          sudo apt-get install -y unzip
+          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+          unzip sonar-scanner-cli-4.6.2.2472-linux.zip
+          export PATH="$PWD/sonar-scanner-4.6.2.2472-linux/bin:$PATH"
 
-    - name: Run SonarScanner
-      run: sonar-scanner -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN
+    - name: Run SonarQube analysis
+      run: |
+          sonar-scanner \
+            -Dsonar.host.url=$SONAR_HOST_URL \
+            -Dsonar.login=$SONAR_TOKEN
       env:
-       DOTNET_ROOT: /home/runner/.dotnet
-       JAVA_HOME: /opt/hostedtoolcache/Java_Adopt_jdk/11.0.21-9/x64
        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
