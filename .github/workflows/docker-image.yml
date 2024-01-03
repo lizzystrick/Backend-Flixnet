@@ -29,15 +29,15 @@ jobs:
 
     # Restore dependencies
     - name: Restore dependencies
-      run: dotnet restore ./FlixnetBackend # Replace with the path to your solution
+      run: dotnet restore ./FlixnetBackend/FlixnetBackend.csproj # Replace with the path to your solution
 
     # Build the project
     - name: Build
-      run: dotnet build --no-restore ./FlixnetBackend
+      run: dotnet build --no-restore ./FlixnetBackend/FlixnetBackend.csproj
 
     # Run unit tests
     - name: Test
-      run: dotnet test --no-build ./Flixnet.Tests
+      run: dotnet test --no-build ./Flixnet.Tests/Flixnet.Tests.csproj
 
     - name: Log in to the GitHub Container Registry
       uses: docker/login-action@v1
