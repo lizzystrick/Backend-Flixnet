@@ -79,10 +79,11 @@ jobs:
         export PATH="$PWD/sonar-scanner-4.6.2.2472-linux/bin:$PATH"
       working-directory: /usr/local/bin
 
-    - name: Run SonarQube analysis
+    - name: Run SonarScanner
+      run: sonar-scanner -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN
       env:
-        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: |
-        sonar-scanner -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN
+       DOTNET_ROOT: /home/runner/.dotnet
+       JAVA_HOME: /opt/hostedtoolcache/Java_Adopt_jdk/11.0.21-9/x64
+       SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
