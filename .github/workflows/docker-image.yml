@@ -68,28 +68,20 @@ jobs:
       with:
         java-version: 11
         distribution: 'adopt'  # Use 'adopt' or 'adopt@1.11' for AdoptOpenJDK 11
-      env:
-        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
     - name: Install SonarScanner
       run: |
-        sudo apt-get update -qy
-          sudo apt-get install -y unzip
-          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
-          unzip sonar-scanner-cli-4.6.2.2472-linux.zip
-          export PATH="$PWD/sonar-scanner-4.6.2.2472-linux/bin:$PATH"
-
-    - name: Check SonarScanner path
-      run: |
-        echo "SonarScanner Path: $(command -v sonar-scanner)"
-
+          curl -sSLo sonar-scanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.0.2311-linux.zip
+          unzip sonar-scanner-cli.zip
+          mv sonar-scanner-4.6.0.2311-linux /opt/sonar-scanner
+      working-directory: /opt
+      env:
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          
     - name: Run SonarQube analysis
       run: |
-          sonar-scanner \
-            -Dsonar.host.url=$SONAR_HOST_URL \
-            -Dsonar.login=$SONAR_TOKEN
+          /opt/sonar-scanner/bin/sonar-scanner
       env:
-       SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          DOTNET_ROOT: /usr/share/dotnet
 
