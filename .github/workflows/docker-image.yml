@@ -80,6 +80,10 @@ jobs:
           unzip sonar-scanner-cli-4.6.2.2472-linux.zip
           export PATH="$PWD/sonar-scanner-4.6.2.2472-linux/bin:$PATH"
 
+    - name: Check SonarScanner path
+      run: |
+        echo "SonarScanner Path: $(command -v sonar-scanner)"
+
     - name: Run SonarQube analysis
       run: |
           sonar-scanner \
