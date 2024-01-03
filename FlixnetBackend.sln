@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlixnetBackend", "FlixnetBackend\FlixnetBackend.csproj", "{FAFEC443-74FC-44E4-8331-8B5658B8E69F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flixnet.Tests", "Flixnet.Tests\Flixnet.Tests.csproj", "{CF37C2D9-3736-4C19-B449-09BEBED84396}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{FAFEC443-74FC-44E4-8331-8B5658B8E69F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAFEC443-74FC-44E4-8331-8B5658B8E69F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAFEC443-74FC-44E4-8331-8B5658B8E69F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF37C2D9-3736-4C19-B449-09BEBED84396}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF37C2D9-3736-4C19-B449-09BEBED84396}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF37C2D9-3736-4C19-B449-09BEBED84396}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF37C2D9-3736-4C19-B449-09BEBED84396}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

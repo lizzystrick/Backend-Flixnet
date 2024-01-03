@@ -18,13 +18,11 @@ namespace FlixnetBackend.Controllers
     {
         private readonly IUserService userService;
         private readonly IMapper mapper;
-        private readonly IConfiguration configuration;
 
-        public UserController(IUserService userService, IMapper mapper, IConfiguration configuration)
+        public UserController(IUserService userService, IMapper mapper)
         {
             this.userService = userService;
             this.mapper = mapper;
-            this.configuration = configuration;
         }
 
         [HttpGet]
@@ -58,19 +56,19 @@ namespace FlixnetBackend.Controllers
             }
             var user = userService.GetUserByEmail(model.Email);
 
-            if (user == null)
+            if (user == null || !userService.ValidateUser(model))
             {
                 return Unauthorized("Invalid credentials");
             }
             
-            var token = GenerateJwtToken(model.Email, user.ID);
+            //var token = GenerateJwtToken(model.Email, user.ID);
 
             // Invalid credentials
-            return Ok(new { Token = token, ID = user.ID });
+            return Ok(new { Message = "Login succesful", ID = user.ID });
         }
 
 
-        private string GenerateJwtToken(string email, Guid ID)
+        /*private string GenerateJwtToken(string email, Guid ID)
         {
             var secretKey = KeyProvider.GetSecretKey();
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
@@ -92,6 +90,6 @@ namespace FlixnetBackend.Controllers
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
-        }
+        }*/
     }
 }

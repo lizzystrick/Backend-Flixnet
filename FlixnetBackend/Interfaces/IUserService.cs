@@ -7,7 +7,7 @@ namespace FlixnetBackend.Interfaces
     {
         User GetUserByEmail(string email);
         UserModel CreateUser(CreateUserModel user);
-        Task<bool> ValidateUser(LoginModel model);
+        bool ValidateUser(LoginModel model);
         //Task<Guid> GetUserId(string email);
 
     }

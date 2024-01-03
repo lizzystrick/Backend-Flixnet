@@ -13,16 +13,13 @@ namespace FlixnetBackend.Logic
         private readonly IMapper mapper;
         private readonly IUserRepository userRepository;
         private readonly IPasswordHasher<User> passwordHasher;
-        private readonly UserManager<User> usermanager;
-        private readonly SignInManager<User> signInManager;
 
-        public UserService(IMapper mapper, IUserRepository userRepository, IPasswordHasher<User> passwordHasher, UserManager<User> usermanager, SignInManager<User> signInManager)
+
+        public UserService(IMapper mapper, IUserRepository userRepository, IPasswordHasher<User> passwordHasher)
         {
             this.mapper = mapper;
             this.userRepository = userRepository;
             this.passwordHasher = passwordHasher;
-            this.usermanager = usermanager;
-            this.signInManager = signInManager;
         }
 
         public User GetUser(Guid userID)
@@ -39,27 +36,26 @@ namespace FlixnetBackend.Logic
 
         public UserModel CreateUser(CreateUserModel insertUser)
         {
-            User user = new User();
-            user.UserName = insertUser.UserName;
-            user.Email = insertUser.Email;
-            user.Password = insertUser.Password;
+            User user = new User
+            {
+                UserName = insertUser.UserName,
+                Email = insertUser.Email,
+                Password = passwordHasher.HashPassword(null, insertUser.Password)
+            };
             User returnedUser = userRepository.CreateUser(user);
 
-            return new UserModel(returnedUser);
+            return mapper.Map<UserModel>(returnedUser);
 
         }
 
-        public async Task<bool> ValidateUser(LoginModel model)
+        public bool ValidateUser(LoginModel model)
         {
-            var user = await usermanager.FindByIdAsync(model.ID.ToString());
-
+            User user = userRepository.GetUserByEmail(model.Email);
             if (user != null)
             {
-                var signInResult = await signInManager.CheckPasswordSignInAsync(user, model.Password, false);
-                return signInResult.Succeeded;
-
+                var result = passwordHasher.VerifyHashedPassword(user, user.Password, model.Password);
+                return result == PasswordVerificationResult.Success;
             }
-
             return false;
         }
 

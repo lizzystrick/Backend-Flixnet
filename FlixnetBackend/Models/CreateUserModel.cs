@@ -16,5 +16,10 @@ namespace FlixnetBackend.Models
             Email = email;
             Password = password;
         }
+        
+        public CreateUserModel()
+        {
+
+        }
     }
 }
