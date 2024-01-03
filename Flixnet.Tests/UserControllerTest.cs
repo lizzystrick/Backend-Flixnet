@@ -61,7 +61,7 @@ namespace Flixnet.Tests
             var controller = new UserController(mockUserService.Object, new Mock<IMapper>().Object);
 
             // Act
-            var result = await controller.Login(new LoginModel { Email = "user@example.com", Password = "correctpass" });
+            var result = controller.Login(new LoginModel { Email = "user@example.com", Password = "correctpass" });
 
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
