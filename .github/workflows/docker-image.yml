@@ -63,3 +63,15 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+    - name: Set up Java for SonarQube analysis
+      uses: actions/setup-java@v2
+      with:
+        java-version: 11
+        distribution: 'adopt'  # Use 'adopt' or 'adopt@1.11' for AdoptOpenJDK 11
+          
+    - name: Run SonarQube analysis
+      uses: sonarsource/sonarcloud-github-action@v1
+      with:
+          project: Flixnet
+          token: ${{ secrets.SONAR_TOKEN }}
+
