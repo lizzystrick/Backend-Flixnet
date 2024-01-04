@@ -22,6 +22,29 @@ namespace FlixnetBackend.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("FlixnetBackend.Business.LikedMovie", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("LikedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MovieId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("LikedMovies");
+                });
+
             modelBuilder.Entity("FlixnetBackend.Business.Movie", b =>
                 {
                     b.Property<Guid>("ID")
@@ -29,7 +52,14 @@ namespace FlixnetBackend.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWID()");
 
-                    b.Property<string>("Description")
+                    b.Property<int>("GenreId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Overview")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -67,7 +97,8 @@ namespace FlixnetBackend.Migrations
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -86,10 +117,21 @@ namespace FlixnetBackend.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("FlixnetBackend.Business.LikedMovie", b =>
+                {
+                    b.HasOne("FlixnetBackend.Business.User", "User")
+                        .WithMany("LikedMovies")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("FlixnetBackend.Business.MovieImage", b =>
                 {
                     b.HasOne("FlixnetBackend.Business.Movie", "Movie")
-                        .WithMany("Images")
+                        .WithMany()
                         .HasForeignKey("MovieID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -97,9 +139,9 @@ namespace FlixnetBackend.Migrations
                     b.Navigation("Movie");
                 });
 
-            modelBuilder.Entity("FlixnetBackend.Business.Movie", b =>
+            modelBuilder.Entity("FlixnetBackend.Business.User", b =>
                 {
-                    b.Navigation("Images");
+                    b.Navigation("LikedMovies");
                 });
 #pragma warning restore 612, 618
         }

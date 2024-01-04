@@ -14,6 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System.Net.WebSockets;
 
 namespace FlixnetBackend
 {
@@ -28,16 +29,10 @@ namespace FlixnetBackend
 
             // Add services to the container.
 
-            builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
-            {
-                options.Password.RequireDigit = true;
-                options.Password.RequiredLength = 7;
-            })
-                .AddEntityFrameworkStores<DBContext>()
-                .AddDefaultTokenProviders();
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddSignalR();
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                .AddJwtBearer(options =>
                {
@@ -83,8 +78,26 @@ namespace FlixnetBackend
             }
 
             app.UseHttpsRedirection();
-            
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHub<NotificationHub>("/notificationHub");
+                // ... other mappings
+            });
+            /*app.UseWebSockets();
+            app.Use(async (context, next) =>
+            {
+                if (context.WebSockets.IsWebSocketRequest)
+                {
+                    WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
+                    await context.RequestServices.GetRequiredService<IWebSocketNotificationService>().AddWebSocketAsync(webSocket);
+                }
+                else
+                {
+                    await next();
+                }
+            });*/
             app.UseCors();
+            
 
             app.UseAuthorization();
 
@@ -148,6 +161,7 @@ namespace FlixnetBackend
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+            builder.Services.AddScoped<ILikedMovieService, LikedMovieService>();
         }
 
     }
