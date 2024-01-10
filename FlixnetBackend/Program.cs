@@ -52,7 +52,7 @@ namespace FlixnetBackend
                 options.AddDefaultPolicy(builder =>
                 {
                     builder
-                        .WithOrigins("http://localhost:4200", "http://localhost:55816")
+                        .WithOrigins("http://localhost:4200", "http://localhost:4201")
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                     .AllowCredentials();

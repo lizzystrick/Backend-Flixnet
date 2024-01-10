@@ -66,10 +66,11 @@ namespace FlixnetBackend.Controllers
             return Ok();
         }
 
-        [HttpGet("{userId}")]
+        [HttpGet("user/{userId}")]
         public async Task<IActionResult> GetLikedMovies(Guid userId)
         {
             var likedMovies = await likedMovieService.GetLikedMoviesByUser(userId);
+            if (likedMovies == null) return NotFound();
             return Ok(likedMovies);
         }
 
