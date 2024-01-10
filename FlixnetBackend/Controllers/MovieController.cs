@@ -16,18 +16,18 @@ namespace FlixnetBackend.Controllers
     [ApiController]
     public class MovieController : ControllerBase
     {
-        private readonly IMovieService movieService;
+        //private readonly IMovieService movieService;
         private readonly IMapper mapper;
         private readonly ILikedMovieService likedMovieService;
 
-        public MovieController(IMovieService movieLogic, IMapper mapper, ILikedMovieService likedMovieService)
+        public MovieController(IMapper mapper, ILikedMovieService likedMovieService)
         {
-            this.movieService = movieLogic;
+            //this.movieService = movieLogic;
             this.mapper = mapper;
             this.likedMovieService = likedMovieService;
         }
 
-        [HttpPost]
+        /*[HttpPost]
         public IActionResult SaveMovies(List<MovieModel> model)
         {
             if (model == null || model.Count == 0)
@@ -38,12 +38,31 @@ namespace FlixnetBackend.Controllers
             var movies = mapper.Map<List<Movie>>(model);
             movieService.SaveMovies(movies);    
             return Ok("Movies saved succesfully");
-        }
+        }*/
+
         [HttpPost("like")]
-        public async Task<IActionResult> LikeMovie([FromBody] LikeMovieModel request)
+        public async Task<IActionResult> LikeMovie([FromBody] LikeMovieModel likemoviemodel)
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            await likedMovieService.LikeMovie(new Guid(userId), request.MovieId);
+            //await likedMovieService.LikeMovie(likemoviemodel.UserId, likemoviemodel.MovieId);
+            //return Ok();
+            // You might want to validate the model here
+            if (likemoviemodel == null || string.IsNullOrWhiteSpace(likemoviemodel.UserId) || string.IsNullOrWhiteSpace(likemoviemodel.MovieId))
+            {
+                return BadRequest("Movie ID cannot be null or empty.");
+            }
+
+            // The UserID should be extracted from the authenticated user's claims
+            // Assuming the user is authenticated and the UserId is in the claims
+            // Convert the user ID to a Guid and call the service
+            if (!Guid.TryParse(likemoviemodel.UserId, out var userId))
+            {
+                return BadRequest("Invalid user ID.");
+            }
+
+            // Call the service to like the movie and notify others
+            await likedMovieService.LikeMovie(userId, likemoviemodel.MovieId);
+
+            // Return a success response
             return Ok();
         }
 

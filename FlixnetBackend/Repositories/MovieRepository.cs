@@ -12,12 +12,7 @@ namespace FlixnetBackend.Repositories
             Database.EnsureCreated();
         }
 
-        public DbSet<Movie> Movies { get; set; }
-        public void SaveMovies(List<Movie> movies)
-        {
-            Movies.AddRange(movies);
-            SaveChanges();
-        }
+        
 
     }
 }

@@ -9,6 +9,7 @@ using FlixnetBackend.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using FlixnetBackend.Logic;
 
 namespace FlixnetBackend.Controllers
 {
@@ -23,6 +24,17 @@ namespace FlixnetBackend.Controllers
         {
             this.userService = userService;
             this.mapper = mapper;
+        }
+
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<string>> GetUserName(Guid userId)
+        {
+            var userName = await userService.GetUserNameById(userId);
+            if (string.IsNullOrEmpty(userName))
+            {
+                return NotFound("User not found.");
+            }
+            return Ok(userName);
         }
 
         [HttpGet]

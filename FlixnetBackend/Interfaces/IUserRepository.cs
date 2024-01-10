@@ -6,6 +6,7 @@ namespace FlixnetBackend.Interfaces
     {
         User GetUser(Guid userID);
         User GetUserByEmail(string email);
+        Task<string> GetUserNameById(Guid userId);
         User CreateUser(User userEntity);
         //Task<Guid> GetUserId(string email);
     }

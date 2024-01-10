@@ -2,6 +2,7 @@
 using FlixnetBackend.Business;
 using FlixnetBackend.Interfaces;
 using FlixnetBackend.Models;
+using FlixnetBackend.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -20,6 +21,11 @@ namespace FlixnetBackend.Logic
             this.mapper = mapper;
             this.userRepository = userRepository;
             this.passwordHasher = passwordHasher;
+        }
+
+        public async Task<string> GetUserNameById(Guid userId)
+        {
+            return await userRepository.GetUserNameById(userId);
         }
 
         public User GetUser(Guid userID)

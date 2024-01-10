@@ -52,10 +52,11 @@ namespace FlixnetBackend
                 options.AddDefaultPolicy(builder =>
                 {
                     builder
-                        .WithOrigins("http://localhost:4200")
+                        .WithOrigins("http://localhost:4200", "http://localhost:55816")
                         .AllowAnyMethod()
-                        .AllowAnyHeader();
-                });
+                        .AllowAnyHeader()
+                    .AllowCredentials();
+            });
             });
 
 
@@ -78,11 +79,7 @@ namespace FlixnetBackend
             }
 
             app.UseHttpsRedirection();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapHub<NotificationHub>("/notificationHub");
-                // ... other mappings
-            });
+
             /*app.UseWebSockets();
             app.Use(async (context, next) =>
             {
@@ -96,12 +93,20 @@ namespace FlixnetBackend
                     await next();
                 }
             });*/
+            app.UseRouting();
             app.UseCors();
-            
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
-            app.MapControllers();
+            
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHub<NotificationHub>("/notificationHub");
+                // ... other mappings
+            });
 
             app.Run();
         }
@@ -162,6 +167,7 @@ namespace FlixnetBackend
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
             builder.Services.AddScoped<ILikedMovieService, LikedMovieService>();
+            builder.Services.AddScoped<ILikedMovieRepository, LikedMovieRepository>();
         }
 
     }

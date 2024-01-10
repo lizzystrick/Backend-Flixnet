@@ -6,7 +6,7 @@ namespace FlixnetBackend.Interfaces
 {
     public interface IMovieService
     {
-        void SaveMovies(List<Movie> model);
+        //void SaveMovies(List<Movie> model);
         //void SaveMovies(IEnumerable<Movie> movies);
     }
 }
