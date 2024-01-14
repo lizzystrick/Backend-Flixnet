@@ -1,0 +1,11 @@
+﻿C:\Users\Lizzy\OneDrive\Documenten\Semester 3.2\Backend-Flixnet\Flixnet.Tests\UserControllerTest.cs
+C:\Users\Lizzy\OneDrive\Documenten\Semester 3.2\Backend-Flixnet\Flixnet.Tests\UserServiceTest.cs
+C:\Users\Lizzy\OneDrive\Documenten\Semester 3.2\Backend-Flixnet\Flixnet.Tests\Usings.cs
+C:\Users\Lizzy\.nuget\packages\microsoft.net.test.sdk\17.1.0\build\netcoreapp2.1\Microsoft.NET.Test.Sdk.Program.cs
+C:\Users\Lizzy\.nuget\packages\microsoft.testplatform.testhost\17.1.0\build\netcoreapp2.1\x64\testhost.exe
+C:\Users\Lizzy\.nuget\packages\microsoft.testplatform.testhost\17.1.0\build\netcoreapp2.1\x64\testhost.dll
+C:\Users\Lizzy\.nuget\packages\microsoft.testplatform.testhost\17.1.0\build\netcoreapp2.1\x64\Microsoft.TestPlatform.PlatformAbstractions.dll
+C:\Users\Lizzy\.nuget\packages\xunit.runner.visualstudio\2.4.3\build\netcoreapp2.1\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+C:\Users\Lizzy\.nuget\packages\xunit.runner.visualstudio\2.4.3\build\netcoreapp2.1\xunit.runner.reporters.netcoreapp10.dll
+C:\Users\Lizzy\.nuget\packages\xunit.runner.visualstudio\2.4.3\build\netcoreapp2.1\xunit.runner.utility.netcoreapp10.dll
+C:\Users\Lizzy\OneDrive\Documenten\Semester 3.2\Backend-Flixnet\Flixnet.Tests\coverage.opencover.xml

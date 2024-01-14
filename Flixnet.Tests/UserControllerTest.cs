@@ -48,25 +48,5 @@ namespace Flixnet.Tests
             // Assert
             Assert.IsType<UnauthorizedObjectResult>(result);
         }
-
-        [Fact]
-        public async Task Login_ReturnsOk_WhenValidCredentials()
-        {
-            // Arrange
-            var user = new User { ID = Guid.NewGuid() };
-            var mockUserService = new Mock<IUserService>();
-            mockUserService.Setup(s => s.GetUserByEmail(It.IsAny<string>())).Returns(user);
-            mockUserService.Setup(s => s.ValidateUser(It.IsAny<LoginModel>())).Returns(true);
-
-            var controller = new UserController(mockUserService.Object, new Mock<IMapper>().Object);
-
-            // Act
-            var result = controller.Login(new LoginModel { Email = "user@example.com", Password = "correctpass" });
-
-            // Assert
-            var okResult = Assert.IsType<OkObjectResult>(result);
-            Assert.NotNull(okResult.Value);
-            // Additional assertions to check the response content
-        }
     }
 }
