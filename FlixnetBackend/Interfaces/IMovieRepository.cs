@@ -9,8 +9,5 @@ namespace FlixnetBackend.Interfaces
     public interface IMovieRepository
     {
         
-        //void SaveMovies(IEnumerable<Movie> movies);
-        //void Save();
-        //void Save(bool acceptChangesOnSuccess);
     }
 }
