@@ -8,6 +8,8 @@ namespace FlixnetBackend.Interfaces
         User GetUserByEmail(string email);
         Task<string> GetUserNameById(Guid userId);
         User CreateUser(User userEntity);
+        Task UpdateUserAsync(User user);
+        Task<User> GetUserByIdAsync(Guid id);
         //Task<Guid> GetUserId(string email);
     }
 }

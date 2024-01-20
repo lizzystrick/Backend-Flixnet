@@ -40,6 +40,19 @@ namespace FlixnetBackend.Logic
             //return new UserModel(user);
         }
 
+        public async Task UpdateUserAsync(UpdateUserModel model)
+        {
+            var user = await userRepository.GetUserByIdAsync(model.ID);
+            if (user == null)
+            {
+                throw new KeyNotFoundException("User not found.");
+            }
+
+            user.UserName = model.Username;
+            user.Email = model.Email; // Map the changes onto the user entity
+            await userRepository.UpdateUserAsync(user);
+        }
+
         public UserModel CreateUser(CreateUserModel insertUser)
         {
             User user = new User

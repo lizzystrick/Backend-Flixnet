@@ -28,6 +28,17 @@ namespace FlixnetBackend.Repositories
             return user?.UserName; // Ensure 'Username' is the correct property name in your User model
         }
 
+        public async Task UpdateUserAsync(User user)
+        {
+            Users.Update(user);
+            await SaveChangesAsync();
+        }
+
+        public async Task<User> GetUserByIdAsync(Guid id)
+        {
+            return await Users.FindAsync(id);
+        }
+
         public User GetUserByEmail(string email)
         {
             User user = null;

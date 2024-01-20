@@ -6,5 +6,6 @@ namespace FlixnetBackend.Interfaces
     {
         Task<IEnumerable<LikedMovie>> GetLikedMoviesByUser(Guid userId);
         Task LikeMovie(LikedMovie likedMovie);
+        Task<bool> DeleteLikedMovieAsync(Guid userId, string movieId);
     }
 }

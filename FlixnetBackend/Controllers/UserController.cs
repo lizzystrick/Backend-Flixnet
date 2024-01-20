@@ -37,6 +37,26 @@ namespace FlixnetBackend.Controllers
             return Ok(userName);
         }
 
+        [HttpPut("{userId}")]
+        public async Task<IActionResult> UpdateUser(Guid userId, [FromBody] UpdateUserModel model)
+        {
+            if (userId != model.ID)
+            {
+                return BadRequest("Mismatched user ID.");
+            }
+
+            try
+            {
+                await userService.UpdateUserAsync(model);
+                return NoContent();
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+            // Add more exception handling as necessary
+        }
+
         [HttpGet]
         [Route("{ID}")]
         public IActionResult GetUserByEmail(string email)

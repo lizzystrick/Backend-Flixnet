@@ -19,6 +19,11 @@ namespace FlixnetBackend.Logic
             _userService = userService;
         }
 
+        public async Task<bool> DeleteLikedMovieAsync(Guid userId, string movieId)
+        {
+            return await _repository.DeleteLikedMovieAsync(userId, movieId);
+        }
+
         public async Task LikeMovie(Guid userId, string movieId)
         {
             

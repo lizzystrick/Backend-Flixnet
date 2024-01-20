@@ -27,18 +27,27 @@ namespace FlixnetBackend.Controllers
             this.likedMovieService = likedMovieService;
         }
 
-        /*[HttpPost]
-        public IActionResult SaveMovies(List<MovieModel> model)
+        [HttpDelete("{userId}/likes/{movieId}")]
+        public async Task<IActionResult> DeleteLikedMovie(Guid userId, string movieId)
         {
-            if (model == null || model.Count == 0)
+            try
             {
-                return BadRequest("Invalid movie data");
+                bool deleted = await likedMovieService.DeleteLikedMovieAsync(userId, movieId);
+                if (deleted)
+                {
+                    return NoContent();
+                }
+                else
+                {
+                    return NotFound("Movie or user not found.");
+                }
             }
-
-            var movies = mapper.Map<List<Movie>>(model);
-            movieService.SaveMovies(movies);    
-            return Ok("Movies saved succesfully");
-        }*/
+            catch (Exception ex)
+            {
+                // Log the exception
+                return StatusCode(500, "Internal server error");
+            }
+        }
 
         [HttpPost("like")]
         public async Task<IActionResult> LikeMovie([FromBody] LikeMovieModel likemoviemodel)

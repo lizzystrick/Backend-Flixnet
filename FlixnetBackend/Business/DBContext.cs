@@ -29,6 +29,7 @@ namespace FlixnetBackend.Business
         .WithOne(lm => lm.User)
         .HasForeignKey(lm => lm.UserId);
 
+
         }
     }
 }
