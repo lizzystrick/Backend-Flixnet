@@ -10,7 +10,6 @@ namespace FlixnetBackend.Interfaces
         UserModel CreateUser(CreateUserModel user);
         bool ValidateUser(LoginModel model);
         Task UpdateUserAsync(UpdateUserModel model);
-        //Task<Guid> GetUserId(string email);
 
     }
 }

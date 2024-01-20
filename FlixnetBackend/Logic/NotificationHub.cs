@@ -7,7 +7,6 @@ namespace FlixnetBackend.Logic
     {
         public async Task LikeMovie(int movieId)
         {
-            // Call the ReceiveLikeNotification method to update clients.
             await Clients.Others.SendAsync("ReceiveLikeNotification", movieId);
         }
     }

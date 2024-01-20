@@ -25,7 +25,7 @@ namespace FlixnetBackend.Repositories
         public async Task<string> GetUserNameById(Guid userId)
         {
             var user = await Users.FindAsync(userId);
-            return user?.UserName; // Ensure 'Username' is the correct property name in your User model
+            return user?.UserName;
         }
 
         public async Task UpdateUserAsync(User user)
@@ -66,17 +66,6 @@ namespace FlixnetBackend.Repositories
             Save();
             return userEntity;
         }
-
-       /* public async Task<Guid?> GetUserId(string email)
-        {
-            var user = await Users.SingleOrDefaultAsync(u => u.Email == email);
-
-            if (user != null)
-            {
-                return user.ID;
-            }
-            return Guid.Empty;
-        }*/
 
         public void Save()
         {

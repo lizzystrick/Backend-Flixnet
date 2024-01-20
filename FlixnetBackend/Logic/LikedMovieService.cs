@@ -9,7 +9,7 @@ namespace FlixnetBackend.Logic
     {
         private readonly ILikedMovieRepository _repository;
         private readonly IHubContext<NotificationHub> _hubContext;
-        private readonly IUserService _userService; // Add user service to get username
+        private readonly IUserService _userService; 
 
         public LikedMovieService(ILikedMovieRepository repository, IHubContext<NotificationHub> hubContext,
             IUserService userService)
@@ -35,10 +35,8 @@ namespace FlixnetBackend.Logic
             };
             await _repository.LikeMovie(likedMovie);
             var userName = await _userService.GetUserNameById(userId);
-            // Save the like action to the database
             
 
-            // Notify other users that a movie has been liked
             await _hubContext.Clients.All.SendAsync("ReceiveLikeNotification", new {userId, movieId, userName});
         }
 

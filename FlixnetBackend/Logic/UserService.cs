@@ -36,8 +36,7 @@ namespace FlixnetBackend.Logic
         public User GetUserByEmail(string email)
         {
             return userRepository.GetUserByEmail(email);
-            //User user = userRepository.GetUserByEmail(email);
-            //return new UserModel(user);
+
         }
 
         public async Task UpdateUserAsync(UpdateUserModel model)
@@ -49,7 +48,7 @@ namespace FlixnetBackend.Logic
             }
 
             user.UserName = model.Username;
-            user.Email = model.Email; // Map the changes onto the user entity
+            user.Email = model.Email; 
             await userRepository.UpdateUserAsync(user);
         }
 
@@ -78,9 +77,5 @@ namespace FlixnetBackend.Logic
             return false;
         }
 
-        /*public async Task<Guid> GetUserId(string email)
-        {
-            return await userRepository.GetUserId(email);
-        }*/
     }
 }
